@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter/rendering.dart' show debugPaintSizeEnabled;
 
@@ -122,11 +123,59 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       body: Container(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home_outlined,size: 30),
+            label: 'Управление',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.format_list_bulleted_outlined,size: 30),
+            label: 'Операции',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add_circle_outline,size: 45),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.event_note_outlined,size: 30),
+            label: 'Планирование',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.more_horiz_outlined,size: 30),
+            label: 'Больше',
+          ),
+        ],
+
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: Colors.blue,
+        showUnselectedLabels: true,
+        unselectedItemColor: Colors.black,
+        unselectedFontSize: 11,
+        selectedFontSize: 11,
+
+      ),
     );
   }
 }
+
+class OneWindow extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    return  Scaffold(
+      body: Container(
+        child: Text('Less boring'),
+        color: Colors.blue,
+        alignment: Alignment.center,
+        width: 200,
+        height: 100,
+      ),
+    );
+  }
+
+}
+
