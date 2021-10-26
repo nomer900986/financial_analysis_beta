@@ -39,22 +39,27 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       'Index 0: Home',
       style: optionStyle,
     ),
+
     Text(
       'Index 1: Business',
       style: optionStyle,
     ),
+
     Text(
       'gh',
       style: optionStyle,
     ),
+
     Text(
       'Index 2: School',
       style: optionStyle,
     ),
+
     Text(
       'Index 3: Больше',
       style: optionStyle,
     ),
+
   ];
 
   void _onItemTapped(int index) {
@@ -63,17 +68,22 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     });
   }
 
+  String dropdownValue = 'Сентябрь';
+
   @override
   Widget build(BuildContext context){
     return Scaffold(
+      backgroundColor: const Color.fromRGBO(235,233,233,1),  //щас мы его и примем
       appBar: AppBar(
-        //title: const Text('AppBar Demo'),
+        backgroundColor: Colors.white,
         leading: Builder(
-        builder: (BuildContext context) {
-         return IconButton(
-            icon: const Icon(Icons.account_circle_outlined, size: 30),
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon( //щас мы его и примем пидорасика ......пора подобедать....пойду полежу чутка
+                  Icons.account_circle_outlined, size: 30, color: Colors.black,
+              ),
 
-            onPressed: () {
+              onPressed: () {
               Navigator.push(context, MaterialPageRoute<void>(
                 builder: (BuildContext context) {
                   return Scaffold(
@@ -118,13 +128,75 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             );
          },
         ),
+        actions: <Widget>[
+
+          DropdownButton<String>(
+            value: dropdownValue,
+            icon: const Icon(Icons.arrow_drop_down_outlined),
+            iconSize: 24,
+            elevation: 16,
+            style: const TextStyle(color: Colors.black),
+            underline: Container(
+              height: 2,
+              color: Colors.white,
+            ),
+            onChanged: (String? newValue) {
+              setState(() {
+                dropdownValue = newValue!;
+              });
+            },
+            items: <String>['Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь','Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август']
+                .map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+          ),
+  ],
+        ),
+
+
+
+
+     /* body: Container(
+        child: _widgetOptions.elementAt(_selectedIndex)
+        ),*/
+
+      body: SingleChildScrollView(
+
+        child: Container(
+          color: Colors.white10,
+          alignment: Alignment.center,
+          child: Column(
+
+            children: <Widget>[
+
+              Box1(
+
+              ),
+              Box2(
+
+              ),
+              Box3(
+
+              ),
+              Box4(
+
+              ),
+              Box5(
+
+              ),
+
+          ],
+        ),
+    ),
       ),
 
-      body: Container(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
+
 
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined,size: 30),
@@ -163,19 +235,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   }
 }
 
-class OneWindow extends StatelessWidget{
-  @override
-  Widget build(BuildContext context) {
-    return  Scaffold(
-      body: Container(
-        child: Text('Less boring'),
-        color: Colors.blue,
-        alignment: Alignment.center,
-        width: 200,
-        height: 100,
-      ),
-    );
-  }
 
 }
 
